@@ -21,7 +21,6 @@ export default function Dashboard() {
   
   const [selectedRule, setSelectedRule] = useState<Rule | null>(null);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-  const [showTransactionDetail, setShowTransactionDetail] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const [isFiltering, startFiltering] = useTransition();
@@ -296,7 +295,6 @@ export default function Dashboard() {
                     evaluations={filteredEvaluations}
                     onSelectTransaction={(transaction) => {
                       setSelectedTransaction(transaction);
-                      setShowTransactionDetail(true);
                     }}
                     selectedTransactionId={selectedTransaction?.transaction_id || null}
                     currentPage={currentPage}
@@ -341,17 +339,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Transaction Detail Modal */}
-      {showTransactionDetail && selectedTransaction && (
-        <TransactionDetail
-          transaction={selectedTransaction}
-          evaluations={selectedTransactionEvaluations}
-          onClose={() => {
-            setShowTransactionDetail(false);
-            setSelectedTransaction(null);
-          }}
-        />
-      )}
     </div>
   );
 }
